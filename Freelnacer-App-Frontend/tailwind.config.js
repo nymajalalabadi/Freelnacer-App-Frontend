@@ -29,6 +29,7 @@ export default {
           300: withOpacity("--color-primary-300"),
           200: withOpacity("--color-primary-200"),
           100: withOpacity("--color-primary-100"),
+          50: withOpacity("--color-primary-50"),
         },
         secondary: {
           900: withOpacity("--color-secondary-900"),
@@ -46,6 +47,7 @@ export default {
         success: withOpacity("--color-success"),
         warning: withOpacity("--color-warning"),
         error: withOpacity("--color-error"),
+        red : withOpacity("--color-red-500")
       },
       container: {
         center: true,
