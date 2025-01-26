@@ -1,12 +1,24 @@
 import { useState } from 'react'
 import TextField from '../../ui/TextField';
+import { useMutation } from '@tanstack/react-query';
+import { getOPT } from '../../services/authService';
+import toast from 'react-hot-toast';
 
 function SendOPTFrom() {
   const [phoneNumber, setPhoneNumber] = useState("");
 
-  const sendOptsHandler = (e) => {
+  const { isPending, error, data, mutateAsync } = useMutation({
+    mutationFn: getOPT,
+  })
+
+  const sendOptsHandler = async (e) => {
     e.preventDefault();
-    console.log(phoneNumber);
+    try{
+    const data =  await mutateAsync({phoneNumber});
+    toast.success(data.message)
+    } catch(error){
+      toast.error(error?.response?.data?.message);
+    }
   }
 
   return (
