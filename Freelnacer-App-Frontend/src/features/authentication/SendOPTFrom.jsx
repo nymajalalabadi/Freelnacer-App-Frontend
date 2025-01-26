@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import TextField from '../../ui/TextField';
 
 function SendOPTFrom() {
     const [phoneNumber, setPhoneNumber] = useState("");
@@ -6,10 +7,7 @@ function SendOPTFrom() {
   return (
     <div>
       <form className="space-y-10">
-        <div>
-            <label htmlFor="phonenumber" className="mb-1">Phone Number</label>
-            <input id="phonenumber" name="phonenumber" value={phoneNumber} onChange={(e) => setPhoneNumber(e.target.value)} type="text"  className="textField__input"/>
-        </div>
+        <TextField label="Phone number" name="phonenumber" value={phoneNumber} onChange={e => setPhoneNumber(e.target.value)}/>
         <button className="btn btn--primary w-full">
             Send verification code
         </button>
