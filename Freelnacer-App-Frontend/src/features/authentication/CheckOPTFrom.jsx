@@ -1,14 +1,29 @@
 import { useNavigate } from 'react-router-dom';
 import { useMutation } from "@tanstack/react-query";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import OTPInput from "react-otp-input";
 import { checkOPT } from "../../services/authService";
 import toast from "react-hot-toast";
+import { HiArrowLeft } from "react-icons/hi";
 
-function CheckOPTFrom({ phoneNumber }){
+const RESEND_TIME = 90;
+
+function CheckOPTFrom({ onBack, phoneNumber, onReSendOtp }){
     const[opt, setOpt] = useState("");
+    const [time, setTime] = useState(RESEND_TIME);
 
     const navigate = useNavigate();
+
+    useEffect(() => {
+        const timer = time > 0 && setInterval(() => setTime((t) => t - 1), 1000);
+        return () => {
+          if (timer) 
+          {
+            clearInterval(timer)
+          };
+        };
+    }, [time]);
+
 
     const { mutateAsync, isPending, error, data } = useMutation({
         mutationFn: checkOPT,
@@ -34,6 +49,17 @@ function CheckOPTFrom({ phoneNumber }){
 
     return(
         <div>
+            <button onClick={onBack}>
+                <HiArrowLeft  className="w-6 h-6 text-secondary-500"/>
+            </button>
+            <div className="mb-4 text-secondary-500">
+                {time > 0 ? (
+                <p> {time} seconds until code resend </p>
+                
+                ) : (
+                <button onClick={onReSendOtp}>Resend verification code</button>
+                )}
+            </div>
             <form className="space-y-10" onSubmit={checkOtpHandler}>
                 <p className="font-bold text-secondary-800">Enter the verification code :</p>
                 <OTPInput value={opt} onChange={e => setOpt(e.target.value)} 
