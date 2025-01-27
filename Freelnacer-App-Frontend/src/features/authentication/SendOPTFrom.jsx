@@ -1,12 +1,10 @@
-import { useState } from 'react'
 import TextField from '../../ui/TextField';
 import { useMutation } from '@tanstack/react-query';
 import { getOPT } from '../../services/authService';
 import toast from 'react-hot-toast';
 import Loading from '../../ui/Loading';
 
-function SendOPTFrom({setStep}) {
-  const [phoneNumber, setPhoneNumber] = useState("");
+function SendOPTFrom({ setStep, phoneNumber, onChange }) {
   
   const { isPending, error, data, mutateAsync } = useMutation({
     mutationFn: getOPT,
@@ -26,7 +24,7 @@ function SendOPTFrom({setStep}) {
   return (
     <div>
       <form className="space-y-10" onSubmit={sendOptsHandler}>
-        <TextField label="Phone number" name="phonenumber" value={phoneNumber} onChange={e => setPhoneNumber(e.target.value)}/>
+        <TextField label="Phone number" name="phonenumber" value={phoneNumber} onChange={onChange}/>
         <div>
           {isPending ? (
             <Loading/>
