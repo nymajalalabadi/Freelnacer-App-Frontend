@@ -5,10 +5,12 @@ import OTPInput from "react-otp-input";
 import { checkOPT } from "../../services/authService";
 import toast from "react-hot-toast";
 import { HiArrowLeft } from "react-icons/hi";
+import { CiEdit } from "react-icons/ci";
+
 
 const RESEND_TIME = 90;
 
-function CheckOPTFrom({ onBack, phoneNumber, onReSendOtp }){
+function CheckOPTFrom({ onBack, phoneNumber, onReSendOtp, otpResponse }){
     const[opt, setOpt] = useState("");
     const [time, setTime] = useState(RESEND_TIME);
 
@@ -52,6 +54,14 @@ function CheckOPTFrom({ onBack, phoneNumber, onReSendOtp }){
             <button onClick={onBack}>
                 <HiArrowLeft  className="w-6 h-6 text-secondary-500"/>
             </button>
+            {otpResponse && (
+            <p className="flex items-center gap-x-2 my-4">
+                <span> {otpResponse?.message}</span>
+                <button onClick={onBack}>
+                    <CiEdit className="w-6 h-6 text-primary-900" />
+                </button>
+            </p>
+            )}
             <div className="mb-4 text-secondary-500">
                 {time > 0 ? (
                 <p> {time} seconds until code resend </p>

@@ -10,7 +10,7 @@ function AuthContainer() {
   const [phoneNumber, setPhoneNumber] = useState("");
   const [step, setStep] = useState(1);
 
-  const { isPending, mutateAsync } = useMutation({
+  const { isPending, mutateAsync, data : otpResponse } = useMutation({
     mutationFn: getOPT,
   })
 
@@ -30,7 +30,7 @@ function AuthContainer() {
       case 1:
         return <SendOPTFrom phoneNumber={phoneNumber} onChange={(e) => setPhoneNumber(e.target.value)} isPending={isPending} sendOptsHandler={sendOptsHandler}/>;
       case 2:
-        return <CheckOPTFrom onBack={() => setStep((s) => s -1)} phoneNumber={phoneNumber} onReSendOtp={sendOptsHandler} />;
+        return <CheckOPTFrom onBack={() => setStep((s) => s -1)} phoneNumber={phoneNumber} onReSendOtp={sendOptsHandler} otpResponse={otpResponse}/>;
       default:
         return null;
     }
