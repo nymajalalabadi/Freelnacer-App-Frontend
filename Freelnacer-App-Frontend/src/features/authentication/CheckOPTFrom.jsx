@@ -11,7 +11,7 @@ import Loading from '../../ui/Loading';
 
 const RESEND_TIME = 90;
 
-function CheckOPTFrom({ onBack, phoneNumber, onReSendOtp, otpResponse }){
+function CheckOPTFrom({ onBack, phoneNumber, onReSendOtp, otpResponse }) {
     const[opt, setOpt] = useState("");
     const [time, setTime] = useState(RESEND_TIME);
 
@@ -43,7 +43,7 @@ function CheckOPTFrom({ onBack, phoneNumber, onReSendOtp, otpResponse }){
                 //if(user.role === "FREELNACER") navigate("/freelnacer");
             }
             else{
-                // navigate("/complete-profile");
+                navigate("/complete-profile");
             }
         } catch (error) {
             toast.error(error?.response?.data?.message);
