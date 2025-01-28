@@ -6,6 +6,7 @@ import { checkOPT } from "../../services/authService";
 import toast from "react-hot-toast";
 import { HiArrowLeft } from "react-icons/hi";
 import { CiEdit } from "react-icons/ci";
+import Loading from '../../ui/Loading';
 
 
 const RESEND_TIME = 90;
@@ -27,7 +28,7 @@ function CheckOPTFrom({ onBack, phoneNumber, onReSendOtp, otpResponse }){
     }, [time]);
 
 
-    const { mutateAsync, isPending, error, data } = useMutation({
+    const { mutateAsync, isPending } = useMutation({
         mutationFn: checkOPT,
     });
 
@@ -82,7 +83,13 @@ function CheckOPTFrom({ onBack, phoneNumber, onReSendOtp, otpResponse }){
                     borderRadius: "0.5rem",
                   }}
                 />
-                <button className="btn btn--primary w-full">Submit</button>
+                <div>
+                {isPending ? (
+                <Loading/>
+                ) : (
+                <button type="submit" className="btn btn--primary w-full">Submit</button>
+                )}
+                </div>
             </form>
         </div>
     );
