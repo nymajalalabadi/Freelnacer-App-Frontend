@@ -1,9 +1,12 @@
 import { useState } from "react"
 import TextField from "../../ui/TextField"
+import RadioInput from "../../ui/RadioInput";
 
 function CompleteProfileFrom() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
+  const [role, setRole] = useState("");
+
 
   return (
     <div className="w-full sm:max-w-sm">
@@ -11,14 +14,8 @@ function CompleteProfileFrom() {
         <TextField label="FistName And LastName" name="name" value={name} onChange={(e) => setName(e.target.value)} />
         <TextField label="Email" name="email" value={email} onChange={(e) => setEmail(e.target.value)}/>
           <div className="flex items-center justify-center gap-x-8">
-            <div className="flex items-center gap-x-8 text-secondary-600">
-              <inpu className="cursor-pointer w-4 h-4 from-radio text-primary-900 focus:ring-primary-900" type="radio" name="role" id="OWNER" value="OWNER" />
-              <label htmlFor="OWNER">Employer</label>
-            </div>
-            <div>
-              <inpu className="cursor-pointer w-4 h-4 from-radio text-primary-900 focus:ring-primary-900" type="radio" name="role" id="FREELNACER" value="FREELNACER" />
-              <label htmlFor="FREELNACER">Freelnacer</label>
-            </div>
+            <RadioInput label="Employer" id="OWNER" name="role" value="OWNER" onChange={e => setRole(e.target.value)} checked={role === "OWNER"}/>
+            <RadioInput label="Freelnacer" id="FREELNACER" name="role" value="FREELNACER" onChange={e => setRole(e.target.value)} checked={role === "FREELNACER"}/>
           </div>
         <button className="btn btn--primary w-full">Complete</button>
       </form>
