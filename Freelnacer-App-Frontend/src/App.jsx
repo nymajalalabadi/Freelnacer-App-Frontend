@@ -15,9 +15,9 @@ function App() {
       <Toaster/>
       <div className="container xl:max-w-screen-xl">
         <Routes>
-          <Route path="/" element={<Home/>} />
           <Route path="/auth" element={<Auth/>} />
           <Route path="/complete-profile" element={<CompleteProfile/>} />
+          <Route path="/" element={<Home/>} />
           <Route path="*" element={<NotFound/>} />
         </Routes>
       </div>

@@ -23,6 +23,16 @@ function CompleteProfileFrom() {
     try{
       const {user, message} = await mutateAsync({name, email, role});
       toast.success(message);
+
+      if(user.status !== 2) 
+      {
+          navigate("/");
+          toast("please wait for admin approval", { icon: "���" });
+          return;
+      }
+
+      if(user.role === "OWNER") return navigate("/owner");
+      if(user.role === "FREELNACER") return navigate("/freelnacer");
     }catch(error){
       toast.error(error?.response?.data?.message);
     }
