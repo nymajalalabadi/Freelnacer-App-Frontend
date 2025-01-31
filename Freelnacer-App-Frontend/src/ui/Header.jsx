@@ -1,6 +1,5 @@
 import useUser from "../features/authentication/useUser"
 
-
 function Header() {
     const { data } = useUser()
   return (
