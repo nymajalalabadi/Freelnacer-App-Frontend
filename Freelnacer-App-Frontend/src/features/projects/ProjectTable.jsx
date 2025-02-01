@@ -1,6 +1,9 @@
 import useOwnerProjects from "./useOwnerProjects";
 import Loading from '../../ui/Loading';
 import Empty from "../../ui/Empty";
+import truncateText from "../../utils/truncateText";
+import toLocalDateShort from "../../utils/toLocalDateShort";
+import { toNumbersWithComma } from "../../utils/toNumbers";
 
 function ProjectTable() {
     const { isLoading, projects } = useOwnerProjects();
@@ -36,10 +39,10 @@ function ProjectTable() {
             return (
               <tr key={project._id}>
                 <td>{index + 1}</td>
-                <td>{project.title}</td>
+                <td>{truncateText(project.title)}</td>
                 <td>{project.category.title}</td>
-                <td>{project.budget}</td>
-                <td>{new Date(project.deadline).toLocaleDateString()}</td>
+                <td>{toNumbersWithComma(project.budget)}</td>
+                <td>{toLocalDateShort(project.deadline)}</td>
                 <td>
                   <div className="flex flex-wrap items-center gap-2 max-w-[200px]">
                     {project.tags.map((tag) => {
