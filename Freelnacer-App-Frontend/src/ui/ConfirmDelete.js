@@ -9,7 +9,7 @@ function ConfirmDelete({ resourceName, onClose, disabled, onConfirm }) {
           <button className="btn btn--primary flex-1" onClick={onClose} disabled={disabled}>
             Cancel
           </button>
-          <button onClick={onConfirm} disabled={disabled} className="btn btn--danger flex-1 py-3">
+          <button className="btn btn--danger flex-1 py-3" onClick={onConfirm} disabled={disabled}>
             Confirmation
           </button>
         </div>

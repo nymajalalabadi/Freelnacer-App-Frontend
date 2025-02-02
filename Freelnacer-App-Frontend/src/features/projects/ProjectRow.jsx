@@ -41,8 +41,8 @@ function ProjectRow({project, index}) {
                     <HiOutlineTrash className="w-5 h-5 text-error" />
                 </button>
                 <Modal open={isDeleteOpen} title={`Delete ${project.title}`} onClose={() => setIsDeleteOpen(false)}>
-                    <ConfirmDelete resourceName={project.title} />
-                </Modal>
+                    <ConfirmDelete resourceName={project.title} onClose={() => setIsDeleteOpen(false)} onConfirm={() => {}} disabled={false}/>
+                </Modal>vvv
             </div>
         </td>
     </Table.Row>
