@@ -6,10 +6,12 @@ import { toNumbersWithComma } from '../../utils/toNumbers'
 import truncateText from '../../utils/truncateText'
 import { HiEye, HiOutlineTrash } from "react-icons/hi";
 import { TbPencilMinus } from "react-icons/tb";
+import ConfirmDelete from '../../ui/ConfirmDelete';
 
 function ProjectRow({project, index}) {
 
     const [isEditOpen, setIsEditOpen] = useState(false);    
+    const [isDeleteOpen, setIsDeleteOpen] = useState(false);
 
   return (
     <Table.Row>
@@ -34,10 +36,13 @@ function ProjectRow({project, index}) {
                 <button onClick={() => setIsEditOpen(true)}>
                     <TbPencilMinus className="w-5 h-5 text-primary-900" />
                 </button>
-                <Modal open={isEditOpen} title="modal title" onClose={() => setIsEditOpen(false)}>this is modal ....</Modal>
-                <button>
+                <Modal open={isEditOpen} title={`Edit ${project.title}`} onClose={() => setIsEditOpen(false)}>this is modal ....</Modal>
+                <button onClick={() => setIsDeleteOpen(true)}>
                     <HiOutlineTrash className="w-5 h-5 text-error" />
                 </button>
+                <Modal open={isDeleteOpen} title={`Delete ${project.title}`} onClose={() => setIsDeleteOpen(false)}>
+                    <ConfirmDelete resourceName={project.title} />
+                </Modal>
             </div>
         </td>
     </Table.Row>
