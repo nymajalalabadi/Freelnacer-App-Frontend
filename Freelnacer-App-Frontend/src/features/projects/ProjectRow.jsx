@@ -38,8 +38,10 @@ function ProjectRow({project, index}) {
                 <button onClick={() => setIsEditOpen(true)}>
                     <TbPencilMinus className="w-5 h-5 text-primary-900" />
                 </button>
-                <Modal open={isEditOpen} title={`Edit ${project.title}`} onClose={() => setIsEditOpen(false)}>this is modal ....</Modal>
-                <button onClick={() => setIsDeleteOpen(true)}>
+                <Modal open={isEditOpen} title={`Edit ${project.title}`} onClose={() => setIsEditOpen(false)}>
+                    this is modal ....
+                </Modal>
+                <button onClick={() => setIsDeleteOpen(true)} >
                     <HiOutlineTrash className="w-5 h-5 text-error" />
                 </button>
                 <Modal open={isDeleteOpen} title={`Delete ${project.title}`} onClose={() => setIsDeleteOpen(false)}>
