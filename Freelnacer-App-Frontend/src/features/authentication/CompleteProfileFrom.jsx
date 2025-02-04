@@ -1,16 +1,14 @@
-import { useState } from "react"
-import TextField from "../../ui/TextField"
-import RadioInput from "../../ui/RadioInput";
+import TextField from "../../ui/TextField";
 import { useMutation } from "@tanstack/react-query";
 import { completeProfile } from "../../services/authService";
 import toast from "react-hot-toast";
 import Loading from "../../ui/Loading";
 import { useNavigate } from "react-router-dom";
+import { useForm } from "react-hook-form";
+import RadioInputGroup from "../../ui/RadioInputGroup";
 
 function CompleteProfileFrom() {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [role, setRole] = useState("");
+  const { handleSubmit, register, watch, formState: { errors } } = useForm();
 
   const navigate = useNavigate()
 
@@ -18,10 +16,9 @@ function CompleteProfileFrom() {
     mutationFn : completeProfile
   });
 
-  const handleSubmit = async(e) => {
-    e.preventDefault();
+  const onSubmit  = async(data) => {
     try{
-      const {user, message} = await mutateAsync({name, email, role});
+      const {user, message} = await mutateAsync(data);
       toast.success(message);
 
       if(user.status !== 2) 
@@ -42,13 +39,29 @@ function CompleteProfileFrom() {
     <div className="flex flex-col gap-y-6 items-center pt-10">
       <h1 className="font-bold text-3xl text-secondary-700">Complete your profile</h1>
       <div className="w-full sm:max-w-sm">
-        <form className="space-y-8" onSubmit={handleSubmit}>
-          <TextField label="Fistname And Lastname" name="name" value={name} onChange={(e) => setName(e.target.value)} />
-          <TextField label="Email" name="email" value={email} onChange={(e) => setEmail(e.target.value)}/>
-            <div className="flex items-center justify-center gap-x-8">
-              <RadioInput label="Employer" id="OWNER" name="role" value="OWNER" onChange={e => setRole(e.target.value)} checked={role === "OWNER"}/>
-              <RadioInput label="Freelnacer" id="FREELNACER" name="role" value="FREELNACER" onChange={e => setRole(e.target.value)} checked={role === "FREELNACER"}/>
-            </div>
+        <form className="space-y-8" onSubmit={handleSubmit(onSubmit)}>
+          <TextField label="First And Last name" name="name" required register={register} validationSchema={{
+              required: "First and last name are required",
+            }} errors={errors} />
+          <TextField label="Email" name="email" required register={register}
+            validationSchema={{ required: "Email is essential", pattern: {
+                value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                message: "Email is invalid",
+              },
+            }} errors={errors} />
+              <RadioInputGroup errors={errors} register={register} watch={watch}
+              configs={{
+              name: "role",
+              validationSchema: { required: "The role is required" },
+              options: [
+                {
+                  value: "OWNER", label: "Owner",
+                },
+                { value: "FREELANCER", label: "Freelancer" },
+              ],
+            }}
+            />
+
               <div>
                 {isPending ? (
                 <Loading/>

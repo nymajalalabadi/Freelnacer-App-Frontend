@@ -41,6 +41,7 @@ function ProjectRow({project, index}) {
                 <Modal open={isEditOpen} title={`Edit ${project.title}`} onClose={() => setIsEditOpen(false)}>
                     this is modal ....
                 </Modal>
+                
                 <button onClick={() => setIsDeleteOpen(true)} >
                     <HiOutlineTrash className="w-5 h-5 text-error" />
                 </button>

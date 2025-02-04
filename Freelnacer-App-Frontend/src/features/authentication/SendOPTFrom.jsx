@@ -1,12 +1,15 @@
 import TextField from '../../ui/TextField';
 import Loading from '../../ui/Loading';
 
-function SendOPTFrom({ phoneNumber, onChange, isPending, sendOptsHandler }) {
+function SendOPTFrom({ register, onSubmit, isPending, errors }) {
   
   return (
     <div>
-      <form className="space-y-10" onSubmit={sendOptsHandler}>
-        <TextField label="Phone number" name="phonenumber" value={phoneNumber} onChange={onChange}/>
+      <form className="space-y-10" onSubmit={onSubmit}>
+        <TextField label="Phone number" name="phonenumber" register={register} required validationSchema={{ required: "Phone number is required", 
+        minLength : { value : 10, message : "Phone number must be at least 10 characters",
+        maxLength : { value : 100, message : "Phone number must be at most 100 characters"}
+        }}} errors={errors}/>
         <div>
           {isPending ? (
             <Loading/>
