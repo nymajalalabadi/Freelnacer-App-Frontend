@@ -4,6 +4,7 @@ import TextField from "../../ui/TextField";
 import { useForm } from "react-hook-form";
 import { useState } from "react";
 import DatePickerField from "../../ui/DatePickerField";
+import useCategories from "../../hooks/useCategories";
 
 function CreateProjectForm() {
 
@@ -11,6 +12,8 @@ function CreateProjectForm() {
 
     const [tags, setTags] = useState([]);
     const [date, setDate] = useState(new Date());
+
+    const { categories } = useCategories();
 
 
     const onSubmit = (data) => {
@@ -31,7 +34,7 @@ function CreateProjectForm() {
 
       <TextField label="Price" name="Price" type="number" register={register} required validationSchema={{ required: "Price is required"}} errors={errors}/>
 
-      <RHFSelect label="Category" name="category" register={register} options={[]} required/>
+      <RHFSelect label="Category" name="category" register={register} options={categories} required/>
 
       <div>
         <label className="mb-2 block text-secondary-700">Tags</label>
