@@ -6,8 +6,8 @@ import { toNumbersWithComma } from '../../utils/toNumbers'
 import truncateText from '../../utils/truncateText'
 import { HiEye, HiOutlineTrash } from "react-icons/hi";
 import { TbPencilMinus } from "react-icons/tb";
-import ConfirmDelete from '../../ui/ConfirmDelete';
 import useRemoveProject from './useRemoveProject';
+import ConfirmDelete from '../../ui/ConfirmDelete';
 
 function ProjectRow({project, index}) {
 
