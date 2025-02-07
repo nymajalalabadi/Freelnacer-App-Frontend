@@ -11,7 +11,7 @@ function ProjectsHeader() {
     <div className="flex items-center justify-between mb-8">
       <h1 className="font-black text-secondary-700 text-xl">Your Projects</h1>
       <Modal title="Add new project"  open={open} onClose={() => setOpen(false)} >
-        <CreateProjectForm />
+        <CreateProjectForm onClose={() => setOpen(false)}/>
       </Modal>
       <button onClick={() => setOpen(true)} className="btn btn--primary flex items-center gap-x-2" >
         <HiOutlinePlus />

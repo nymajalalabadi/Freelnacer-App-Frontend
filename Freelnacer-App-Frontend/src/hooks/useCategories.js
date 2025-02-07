@@ -4,8 +4,8 @@ import { getCategoryApi } from "../services/categoryService";
 export default function useCategories()
 {
     const { data, isLoading } = useQuery({
-            queryKey: ["categories"],
-            queryFn:getCategoryApi
+        queryKey: ["categories"],
+        queryFn:getCategoryApi
     });
 
     const { categories : rawCategories = [] } = data || {};

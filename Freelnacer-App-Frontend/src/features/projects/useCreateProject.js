@@ -5,6 +5,7 @@ import toast from "react-hot-toast";
 export default function useCreateProject()
 {
     const queryClient = useQueryClient();
+
     const { mutate: createProject, isPending: isCreating } = useMutation({
         mutationFn: CreateProjectApi,
         onSuccess: (data) => {
@@ -17,5 +18,7 @@ export default function useCreateProject()
         onError: (error) => {
             toast.error(error?.response?.data?.message);
         }
-      })
+      });
+
+      return { createProject, isCreating };
 }

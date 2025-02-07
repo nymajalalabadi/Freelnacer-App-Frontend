@@ -5,19 +5,30 @@ import { useForm } from "react-hook-form";
 import { useState } from "react";
 import DatePickerField from "../../ui/DatePickerField";
 import useCategories from "../../hooks/useCategories";
+import useCreateProject from "./useCreateProject";
+import Loading from '../../ui/Loading';
 
-function CreateProjectForm() {
+function CreateProjectForm({ onClose }) {
 
-    const {register, formState:{ errors }, handleSubmit} = useForm();
+    const {register, formState:{ errors }, handleSubmit, reset} = useForm();
 
     const [tags, setTags] = useState([]);
     const [date, setDate] = useState(new Date());
 
     const { categories } = useCategories();
 
+    const { isCreating, createProject } = useCreateProject();
+
 
     const onSubmit = (data) => {
-        console.log(data);
+      const newProject = {...data, tags, deadline: new Date(date).toISOString()};
+
+      createProject(newProject, {
+        onSuccess: () => {
+          onClose();
+          reset();
+        },
+      });
     }
 
   return (
@@ -28,11 +39,11 @@ function CreateProjectForm() {
         }}} errors={errors}/>
 
       <TextField label="Project Description" name="Description" register={register} required validationSchema={{ required: "Description is required", 
-        minLength : { value : 15, message : "title must be at least 15 characters",
-        maxLength : { value : 500, message : "title must be at most 500 characters"}
+        minLength : { value : 15, message : "Description must be at least 15 characters",
+        maxLength : { value : 500, message : "Description must be at most 500 characters"}
         }}} errors={errors}/>
 
-      <TextField label="Price" name="Price" type="number" register={register} required validationSchema={{ required: "Price is required"}} errors={errors}/>
+      <TextField label="Price" name="budget" type="number" register={register} required validationSchema={{ required: "Price is required"}} errors={errors}/>
 
       <RHFSelect label="Category" name="category" register={register} options={categories} required/>
 
@@ -41,7 +52,15 @@ function CreateProjectForm() {
         <TagsInput value={tags} onChange={setTags} name="tags" />
       </div>
       <DatePickerField label="Deadline" date={date} setDate={setDate}/>
-      <button type="submit" className="btn btn--primary w-full">Create</button>
+      <div className="!mt-8">
+        {
+          isCreating ? (
+            <Loading/>
+          ) : (
+            <button type="submit" className="btn btn--primary w-full">Create</button>
+          )
+        }
+      </div>
     </form>
   )
 }
