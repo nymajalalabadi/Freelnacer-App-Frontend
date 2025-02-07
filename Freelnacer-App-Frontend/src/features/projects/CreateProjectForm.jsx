@@ -7,6 +7,7 @@ import DatePickerField from "../../ui/DatePickerField";
 import useCategories from "../../hooks/useCategories";
 import useCreateProject from "./useCreateProject";
 import Loading from '../../ui/Loading';
+import useEditProject from "./useEditProject";
 
 function CreateProjectForm({ onClose, projectToEdit = {} }) {
 
@@ -34,17 +35,33 @@ function CreateProjectForm({ onClose, projectToEdit = {} }) {
   const { categories } = useCategories();
 
   const { isCreating, createProject } = useCreateProject();
+  const { editProject, isEditing } = useEditProject();
 
 
   const onSubmit = (data) => {
     const newProject = {...data, tags, deadline: new Date(date).toISOString()};
 
-    createProject(newProject, {
-      onSuccess: () => {
-        onClose();
-        reset();
-      },
-    });
+    if (isEditSession)
+    {
+      editProject(
+        { id: editId, newProject },
+        {
+          onSuccess: () => {
+            onClose();
+            reset();
+          },
+        }
+      );
+
+    }
+    else{
+      createProject(newProject, {
+        onSuccess: () => {
+          onClose();
+          reset();
+        },
+      });
+    }
   }
 
   return (
