@@ -8,28 +8,44 @@ import useCategories from "../../hooks/useCategories";
 import useCreateProject from "./useCreateProject";
 import Loading from '../../ui/Loading';
 
-function CreateProjectForm({ onClose }) {
+function CreateProjectForm({ onClose, projectToEdit = {} }) {
 
-    const {register, formState:{ errors }, handleSubmit, reset} = useForm();
+  //edit
+  const {_id : editId } = projectToEdit;
 
-    const [tags, setTags] = useState([]);
-    const [date, setDate] = useState(new Date());
+  const isEditSession = Boolean(editId);
 
-    const { categories } = useCategories();
+  const { title, description, budget, category, deadline, tags: prevTags } = projectToEdit;
 
-    const { isCreating, createProject } = useCreateProject();
+  let editValues = {};
+
+  if (isEditSession) 
+  {
+    editValues = { title, description, budget, category: category._id };
+  }
+  //
 
 
-    const onSubmit = (data) => {
-      const newProject = {...data, tags, deadline: new Date(date).toISOString()};
+  const {register, formState:{ errors }, handleSubmit, reset} = useForm();
 
-      createProject(newProject, {
-        onSuccess: () => {
-          onClose();
-          reset();
-        },
-      });
-    }
+  const [tags, setTags] = useState(prevTags || []);
+  const [date, setDate] = useState(new Date(deadline || ""));
+
+  const { categories } = useCategories();
+
+  const { isCreating, createProject } = useCreateProject();
+
+
+  const onSubmit = (data) => {
+    const newProject = {...data, tags, deadline: new Date(date).toISOString()};
+
+    createProject(newProject, {
+      onSuccess: () => {
+        onClose();
+        reset();
+      },
+    });
+  }
 
   return (
     <form className="space-y-8" onSubmit={handleSubmit(onSubmit)}>

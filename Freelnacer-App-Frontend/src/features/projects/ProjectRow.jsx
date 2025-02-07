@@ -8,6 +8,7 @@ import { HiEye, HiOutlineTrash } from "react-icons/hi";
 import { TbPencilMinus } from "react-icons/tb";
 import useRemoveProject from './useRemoveProject';
 import ConfirmDelete from '../../ui/ConfirmDelete';
+import CreateProjectForm from './CreateProjectForm';
 
 function ProjectRow({project, index}) {
 
@@ -39,7 +40,7 @@ function ProjectRow({project, index}) {
                     <TbPencilMinus className="w-5 h-5 text-primary-900" />
                 </button>
                 <Modal open={isEditOpen} title={`Edit ${project.title}`} onClose={() => setIsEditOpen(false)}>
-                    this is modal ....
+                    <CreateProjectForm projectToEdit={project} onClose={() => setIsEditOpen(false)}/>
                 </Modal>
                 
                 <button onClick={() => setIsDeleteOpen(true)} >
@@ -47,10 +48,8 @@ function ProjectRow({project, index}) {
                 </button>
                 <Modal open={isDeleteOpen} title={`Delete ${project.title}`} onClose={() => setIsDeleteOpen(false)}>
                     <ConfirmDelete resourceName={project.title} onClose={() => setIsDeleteOpen(false)} 
-                        onConfirm={() => removeProject(project._id, {
-                        onSuccess: () => setIsDeleteOpen(false),
-                        onError: () => setIsDeleteOpen(false)
-                    })} disabled={false} />
+                        onConfirm={() => removeProject(project._id, {onSuccess: () => setIsDeleteOpen(false), onError: () => setIsDeleteOpen(false)})} disabled={false} 
+                    />
                 </Modal>
             </div>
         </td>
