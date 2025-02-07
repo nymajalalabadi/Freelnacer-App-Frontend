@@ -12,3 +12,7 @@ export function removeProjectApi(id) {
     return http.delete(`/project/${id}`).then(({data}) => data);
 }
 
+export function editProjectApi( id, newProject ) {
+    return http.patch(`/project/update/${id}`, newProject).then(({data}) => data);
+}
+

@@ -26,7 +26,7 @@ function CreateProjectForm({ onClose, projectToEdit = {} }) {
   //
 
 
-  const {register, formState:{ errors }, handleSubmit, reset} = useForm();
+  const {register, formState:{ errors }, handleSubmit, reset} = useForm({ defaultValues : editValues });
 
   const [tags, setTags] = useState(prevTags || []);
   const [date, setDate] = useState(new Date(deadline || ""));

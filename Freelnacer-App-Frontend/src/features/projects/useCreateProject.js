@@ -20,5 +20,5 @@ export default function useCreateProject()
         }
       });
 
-      return { createProject, isCreating };
+    return { createProject, isCreating };
 }
