@@ -4,6 +4,7 @@ import useToggleProjectStatus from "./useToggleprojectStatus";
 
 function ToggleProjectStatus({ project }) {
   const { status } = project;
+  
   const { isUpdating, toggleProjectStatus } = useToggleProjectStatus();
 
   const toggleHandler = () => {

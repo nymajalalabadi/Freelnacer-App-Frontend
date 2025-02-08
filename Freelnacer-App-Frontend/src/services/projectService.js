@@ -17,7 +17,7 @@ export function editProjectApi( id, newProject ) {
 }
 
 export function toggleProjectStatusApi({ id, data }) {
-    //{status:"OPEN"}
+    //data : {status:"OPEN"}
     return http.patch(`/project/${id}`, data).then(({ data }) => data.data);
   }
   
