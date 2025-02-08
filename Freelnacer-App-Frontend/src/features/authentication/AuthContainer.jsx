@@ -16,32 +16,29 @@ function AuthContainer() {
     mutationFn: getOPT,
   })
 
-  const sendOptsHandler = async (data) => {
-    try{
-    const {message} =  await mutateAsync(data);
-    setStep(2);
-    toast.success(message)
-    } catch(error){
+  const sendOtpHandler = async (data) => {
+    try {
+      const { message } = await mutateAsync(data);
+      setStep(2);
+      toast.success(message);
+    } catch (error) {
       toast.error(error?.response?.data?.message);
     }
-  }
+  };
 
   const renderStep = () => {
     switch (step) {
       case 1:
-        return <SendOPTFrom register={register} onSubmit={handleSubmit(sendOptsHandler)}  isPending={isPending} errors={errors}/>;
+        return <SendOPTFrom register={register} onSubmit={handleSubmit(sendOtpHandler)}  isPending={isPending} errors={errors}/>;
       case 2:
-        return <CheckOPTFrom onBack={() => setStep((s) => s -1)} phoneNumber={getValues("phoneNumber")} onReSendOtp={sendOptsHandler} otpResponse={otpResponse}/>;
+        return <CheckOPTFrom onBack={() => setStep((s) => s -1)} phoneNumber={getValues("phoneNumber")} onReSendOtp={sendOtpHandler} otpResponse={otpResponse}/>;
       default:
         return null;
     }
   };
 
-  return (
-    <div className="w-full sm:max-w-sm">
-        {renderStep()}
-    </div>
-  )
+  return <div className="w-full sm:max-w-sm">{renderStep()}</div>;
+  
 }
 
 export default AuthContainer

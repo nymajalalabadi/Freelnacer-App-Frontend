@@ -9,6 +9,7 @@ import { TbPencilMinus } from "react-icons/tb";
 import useRemoveProject from './useRemoveProject';
 import ConfirmDelete from '../../ui/ConfirmDelete';
 import CreateProjectForm from './CreateProjectForm';
+import ToggleProjectStatus from './ToggleProjectStatus';
 
 function ProjectRow({project, index}) {
 
@@ -33,7 +34,8 @@ function ProjectRow({project, index}) {
         </td>
         <td>{project.freelancer?.name || "-"}</td>
         <td>
-            {project.status === "OPEN" ? ( <span className="badge badge--success">OPEN</span> ) : (<span className="badge badge--danger">CLOSED</span>)}
+            {/* {project.status === "OPEN" ? ( <span className="badge badge--success">OPEN</span> ) : (<span className="badge badge--danger">CLOSED</span>)} */}
+            <ToggleProjectStatus project={project}/>
         </td>
         <td>
             <div className="flex items-center gap-x-4">
