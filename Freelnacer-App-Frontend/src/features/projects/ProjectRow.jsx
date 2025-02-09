@@ -10,6 +10,7 @@ import useRemoveProject from './useRemoveProject';
 import ConfirmDelete from '../../ui/ConfirmDelete';
 import CreateProjectForm from './CreateProjectForm';
 import ToggleProjectStatus from './ToggleProjectStatus';
+import { Link } from 'react-router-dom';
 
 function ProjectRow({project, index}) {
 
@@ -55,6 +56,11 @@ function ProjectRow({project, index}) {
                     />
                 </Modal>
             </div>
+        </td>
+        <td>
+            <Link to={project._id} className="flex justify-center">
+                <HiEye className="w-5 h-5 text-primary-800"/>
+            </Link>
         </td>
     </Table.Row>
   )

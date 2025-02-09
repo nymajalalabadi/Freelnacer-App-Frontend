@@ -26,6 +26,7 @@ function Siderbar() {
 export default Siderbar
 
 
+
 function CustomNavlink({children, to}) {
   const navlinkClass = "flex items-center gap-2 px-2 py-1.5 rounded-lg transition-all duration-300 hover:bg-primary-100/50 hover:text-primary-900";
 

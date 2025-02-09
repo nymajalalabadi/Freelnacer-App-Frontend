@@ -29,6 +29,7 @@ function ProjectTable() {
             <th>Freelnacer</th>
             <th>Status</th>
             <th>Operation</th>
+            <th>Requests</th>
         </Table.Header>
         <Table.Body>
             {projects.map((project, index) => {
