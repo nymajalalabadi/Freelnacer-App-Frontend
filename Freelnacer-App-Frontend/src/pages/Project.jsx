@@ -4,7 +4,6 @@ import ProjectHeader from "../features/project/ProjectHeader";
 import ProposalsTable from "../features/project/ProposalsTable";
 
 function Project() {
-
   const { isLoading, project } = useProject()
 
   if(isLoading) return (
@@ -13,8 +12,8 @@ function Project() {
 
   return (
     <div>
-      <ProjectHeader project={project}/>
-      <ProposalsTable Proposals={project.proposals}/>
+      <ProjectHeader project={project} />
+      <ProposalsTable proposals={project.proposals} />
     </div>
   )
 }
