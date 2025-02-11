@@ -28,8 +28,16 @@ function CompleteProfileFrom() {
           return;
       }
 
-      if(user.role === "OWNER") return navigate("/owner");
-      if(user.role === "FREELNACER") return navigate("/freelnacer");
+      if(user.role === "OWNER")
+      {
+        return navigate("/owner");
+      }
+      
+      if(user.role === "FREELNACER")
+      {
+        return navigate("/freelnacer");
+      }
+
     }catch(error){
       toast.error(error?.response?.data?.message);
     }
