@@ -9,13 +9,15 @@ import OwnerDashboard from "./pages/OwnerDashboard";
 import AppLayout from "./ui/AppLayout";
 import Projects from "./pages/Projects";
 import Project from "./pages/Project";
+import { DarkModeProvider } from "./context/DarkModeContext";
 
 const queryClient = new QueryClient();
 
 function App() {
   
   return (
-    <QueryClientProvider client={queryClient}>
+    <DarkModeProvider>
+      <QueryClientProvider client={queryClient}>
       <Toaster/>
         <Routes>
           <Route path="/" element={ <Home/> } />
@@ -30,6 +32,7 @@ function App() {
           <Route path="*" element={ <NotFound/> } />
         </Routes>
     </QueryClientProvider>
+    </DarkModeProvider>
   )
 }
 
