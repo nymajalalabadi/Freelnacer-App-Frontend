@@ -21,11 +21,11 @@ const statusStyle = [
 ];
 
 function ProposalRow( {proposal, index }) {
-    const { status } = proposal;
+  const { status } = proposal;
 
     //const color = status === "2" ? "primary" : status === "1" ? "success" : "danger";
 
-    const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(false);
 
   return (
     <Table.Row>
