@@ -67,14 +67,14 @@ function CreateProjectForm({ onClose, projectToEdit = {} }) {
   return (
     <form className="space-y-8" onSubmit={handleSubmit(onSubmit)}>
       <TextField label="Project Title" name="title" register={register} required validationSchema={{ required: "title is required", 
-        minLength : { value : 10, message : "title must be at least 10 characters",
+        minLength : { value : 10, message : "title must be at least 10 characters"},
         maxLength : { value : 100, message : "title must be at most 100 characters"}
-        }}} errors={errors}/>
+        }} errors={errors}/>
 
       <TextField label="Project Description" name="Description" register={register} required validationSchema={{ required: "Description is required", 
-        minLength : { value : 15, message : "Description must be at least 15 characters",
+        minLength : { value : 15, message : "Description must be at least 15 characters"},
         maxLength : { value : 500, message : "Description must be at most 500 characters"}
-        }}} errors={errors}/>
+        }} errors={errors}/>
 
       <TextField label="Price" name="budget" type="number" register={register} required validationSchema={{ required: "Price is required"}} errors={errors}/>
 

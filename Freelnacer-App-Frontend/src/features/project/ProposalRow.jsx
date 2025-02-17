@@ -6,24 +6,24 @@ import Modal from '../../ui/Modal';
 import ChangeProposalStatus from './ChangeProposalStatus';
 
 const statusStyle = [
-    {
-      label: "Rejected",
-      className: "badge--danger",
-    },
-    {
-      label: "Awaiting approval",
-      className: "badge--secondary",
-    },
-    {
-      label: "Confirmed",
-      className: "badge--success",
-    },
+  {
+    label: "Rejected",
+    className: "badge--danger",
+  },
+  {
+    label: "Awaiting approval",
+    className: "badge--secondary",
+  },
+  {
+    label: "Confirmed",
+    className: "badge--success",
+  },
 ];
 
 function ProposalRow( {proposal, index }) {
   const { status } = proposal;
 
-    //const color = status === "2" ? "primary" : status === "1" ? "success" : "danger";
+  //const color = status === "2" ? "primary" : status === "1" ? "success" : "danger";
 
   const [open, setOpen] = useState(false);
 

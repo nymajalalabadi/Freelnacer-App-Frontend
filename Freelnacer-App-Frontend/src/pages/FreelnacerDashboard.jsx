@@ -1,4 +1,3 @@
-import React from 'react'
 import DashboardLayout from '../features/freelnacer/DashboardLayout'
 
 function FreelnacerDashboard() {
