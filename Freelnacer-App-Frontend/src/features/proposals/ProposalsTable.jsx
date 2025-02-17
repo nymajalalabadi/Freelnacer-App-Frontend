@@ -1,4 +1,3 @@
-import React from 'react'
 import useProposals from './useProposals'
 import Table from '../../ui/Table'
 import Empty from '../../ui/Empty'

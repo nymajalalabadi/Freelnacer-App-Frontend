@@ -11,13 +11,13 @@ function FreelnacerLayout() {
           <HiHome />
           <span>Dashboard</span>
         </CustomNavlink>
+        <CustomNavlink to="proposals">
+          <HiCollection />
+          <span>proposals</span>
+        </CustomNavlink>
         <CustomNavlink to="projects">
           <HiCollection />
           <span>Projects</span>
-        </CustomNavlink>
-        <CustomNavlink to="proposals">
-          <HiCollection />
-          <span>Requests</span>
         </CustomNavlink>
       </Siderbar>
     </AppLayout>
