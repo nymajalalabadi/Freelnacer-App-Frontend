@@ -23,14 +23,17 @@ const options = [
 
   
 function ChangeProposalStatus({ proposalId, onClose }) {
-    const { id: projectId } = useParams();
-    const { chnageProposalStatus, isUpdating } = useChangeProposalStaus();
-    const { register, handleSubmit } = useForm();
+
+  const { id: projectId } = useParams();
+
+  const { chnageProposalStatus, isUpdating } = useChangeProposalStaus();
+  
+  const { register, handleSubmit } = useForm();
 
 
   const onSubmit = (data) => {
     chnageProposalStatus(
-      { id: proposalId, data },
+      { proposalId, projectId, ...data },
       {
         onSuccess: () => {
           onClose();
