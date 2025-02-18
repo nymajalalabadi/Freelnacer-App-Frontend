@@ -5,7 +5,6 @@ import toLocalDateShort from '../../../utils/toLocalDateShort';
 import { numberWithCommas } from '../../../utils/toNumbers';
 import { MdAssignmentAdd } from "react-icons/md";
 import Modal from '../../../ui/Modal';
-import ChangeProposalStatus from '../../proposals/ChangeProposalStatus';
 import CreateProposal from '../../proposals/CreateProposal';
 
 const projectStatus = {
