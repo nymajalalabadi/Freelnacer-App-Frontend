@@ -8,13 +8,13 @@ import Home from "./pages/Home";
 import OwnerDashboard from "./pages/OwnerDashboard";
 import Projects from "./pages/Projects";
 import Project from "./pages/Project";
-import { DarkModeProvider } from "./context/DarkModeContext";
 import OwnerLayout from "./features/owner/OwnerLayout";
 import Proposals from "./pages/Proposals";
 import SubmittedProjects from "./pages/SubmittedProjects";
 import FreelnacerDashboard from "./pages/FreelnacerDashboard";
 import FreelnacerLayout from "./features/freelnacer/FreelnacerLayout";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
+import { DarkModeProvider } from "./context/DarkModeContext";
 
 const queryClient = new QueryClient();
 

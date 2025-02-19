@@ -1,8 +1,8 @@
-import { createContext, useContext, useEffect } from "react"
+import { createContext, useEffect } from "react"
 import useLocalStorageState from "../hooks/useLocalStoragesTate";
 
 
-const DarkModeContext = createContext();
+export const DarkModeContext = createContext();
 
 export function DarkModeProvider({ children }) {
 
@@ -32,15 +32,4 @@ export function DarkModeProvider({ children }) {
   )
 }
 
-
-export function useDarkMode() {
-    const context = useContext(DarkModeContext);
-
-    if (context === undefined) 
-    {
-        throw new Error('useDarkMode must be used within a DarkModeProvider');
-    }
-
-    return context;
-}
 
