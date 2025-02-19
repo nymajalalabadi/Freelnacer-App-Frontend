@@ -14,6 +14,7 @@ import Proposals from "./pages/Proposals";
 import SubmittedProjects from "./pages/SubmittedProjects";
 import FreelnacerDashboard from "./pages/FreelnacerDashboard";
 import FreelnacerLayout from "./features/freelnacer/FreelnacerLayout";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 
 const queryClient = new QueryClient();
 
@@ -22,6 +23,7 @@ function App() {
   return (
     <DarkModeProvider>
       <QueryClientProvider client={queryClient}>
+      <ReactQueryDevtools initialIsOpen={false} />
       <Toaster/>
         <Routes>
           <Route path="/" element={ <Home /> } />

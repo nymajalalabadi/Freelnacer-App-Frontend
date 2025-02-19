@@ -4,7 +4,7 @@ import useLocalStorageState from "../hooks/useLocalStoragesTate";
 
 const DarkModeContext = createContext();
 
-export function DarkModeProvider({ Children }) {
+export function DarkModeProvider({ children }) {
 
   const [isDarkMode, setIsDarkMode] = useLocalStorageState(
     "isDarkMoode",
@@ -27,7 +27,7 @@ export function DarkModeProvider({ Children }) {
 
   return (
     <DarkModeContext.Provider value={{ isDarkMode, toggleDarkMode }}>
-      {Children}
+      {children}
     </DarkModeContext.Provider>
   )
 }
