@@ -15,6 +15,7 @@ import FreelnacerDashboard from "./pages/FreelnacerDashboard";
 import FreelnacerLayout from "./features/freelnacer/FreelnacerLayout";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { DarkModeProvider } from "./context/DarkModeContext";
+import ProtectedRoute from "./ui/ProtectedRoute";
 
 const queryClient = new QueryClient();
 
@@ -29,13 +30,21 @@ function App() {
           <Route path="/" element={ <Home /> } />
           <Route path="/auth" element={ <Auth /> } />
           <Route path="/complete-profile" element={ <CompleteProfile /> } />
-          <Route path="/owner"  element={<OwnerLayout />}>
+          <Route path="/owner"  element={
+            <ProtectedRoute>
+              <OwnerLayout />
+            </ProtectedRoute>
+          }>
             <Route index element={ <Navigate to="dashboard" replace /> } />
             <Route path="dashboard" element={ <OwnerDashboard /> } />
             <Route path="projects" element={ <Projects /> } />
             <Route path="projects/:id" element={ <Project /> } />
           </Route>
-          <Route path="/freelnacer" element={ <FreelnacerLayout /> }>
+          <Route path="/freelnacer" element={ 
+            <ProtectedRoute>
+              <FreelnacerLayout />
+            </ProtectedRoute>
+           }>
             <Route index element={ <Navigate to="dashboard" replace /> } />
             <Route path="dashboard" element={< FreelnacerDashboard />}/>
             <Route path="proposals" element={< Proposals />}/>
