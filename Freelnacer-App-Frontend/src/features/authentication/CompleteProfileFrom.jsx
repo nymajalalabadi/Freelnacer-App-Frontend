@@ -38,6 +38,11 @@ function CompleteProfileFrom() {
         return navigate("/freelnacer");
       }
 
+      if(user.role === "ADMIN")
+        {
+          return navigate("/admin");
+        }
+
     }catch(error){
       toast.error(error?.response?.data?.message);
     }

@@ -10,7 +10,7 @@ function ProjectHeader({ project }) {
         <HiArrowLeft className="w-5 h-5 text-secondary-500" />
       </button>
       <h1 className="font-black text-secondary-700 text-xl">
-        {project.title} Request List
+        {project.title} Requests Of List
       </h1>
     </div>
   )

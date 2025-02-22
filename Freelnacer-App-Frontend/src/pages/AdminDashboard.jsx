@@ -1,9 +1,8 @@
-import DashboardLayout from "../features/admin/DashboardLayout"
-
+import DashboardLayout from '../features/admin/DashboardLayout'
 
 function AdminDashboard() {
   return (
-    <DashboardLayout />
+    <DashboardLayout/>
   )
 }
 
