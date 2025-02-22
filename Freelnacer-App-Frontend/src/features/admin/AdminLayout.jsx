@@ -1,15 +1,19 @@
 import AppLayout from '../../ui/AppLayout'
 import Siderbar from '../../ui/Siderbar'
 import CustomNavlink from '../../ui/CustomNavlink'
-import { HiCollection, HiHome, HiOutlineViewGrid } from 'react-icons/hi'
+import { HiCollection, HiHome, HiOutlineViewGrid, HiUser } from 'react-icons/hi'
 
-function FreelnacerLayout() {
+function AdminLayout() {
   return (
     <AppLayout>
       <Siderbar>
         <CustomNavlink to="dashboard">
           <HiHome />
           <span>Dashboard</span>
+        </CustomNavlink>
+        <CustomNavlink to="users">
+          <HiUser />
+          <span>Users</span>
         </CustomNavlink>
         <CustomNavlink to="proposals">
           <HiCollection />
@@ -24,4 +28,4 @@ function FreelnacerLayout() {
   )
 }
 
-export default FreelnacerLayout
+export default AdminLayout
