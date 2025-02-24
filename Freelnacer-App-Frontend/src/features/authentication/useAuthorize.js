@@ -11,17 +11,17 @@ export default function useAuthorize() {
 
     if (user) 
     {
-        isAuthenticated = true;
+      isAuthenticated = true;
     }
 
-    let isAuthorized = false;
-  
     let isVerified = false;
 
     if (user && Number(user.status) === 2)
     {
-        isVerified = true;
+      isVerified = true;
     }
+    
+    let isAuthorized = false;
   
     // if (pathname.includes("owner")) {
     //   if (user && user.role === "OWNER") isAuthorized = true;

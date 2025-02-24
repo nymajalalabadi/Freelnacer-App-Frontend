@@ -25,7 +25,7 @@ export function getUsersApi() {
     return http.get("/admin/user/list").then(({ data }) => data.data);
 }
 
-export function changeUserStatusApi({ userId, data }) {
+export function changeUserStatusApi({ userId, data }) { //({ userId, status }) => {status}
     // data => {status:0, 1, 2}
     return http.patch(`/admin/user/verify/${userId}`, data).then(({ data }) => data.data);
 }

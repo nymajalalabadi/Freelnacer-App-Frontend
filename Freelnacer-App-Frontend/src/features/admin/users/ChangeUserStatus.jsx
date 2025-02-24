@@ -26,12 +26,12 @@ function ChangeUserStatus({ userId, onClose }) {
     const queryClient = useQueryClient();
 
     const onSubmit = (data) => {
-        changeUserStatus(
+        changeUserStatus(     //{ userId, ...data },
           { userId, data },  //{userId, data: {status:0, 1, 2}}
           {
             onSuccess: () => {
               onClose();
-              
+
               queryClient.invalidateQueries({ queryKey: ["users"] });
             },
           }
