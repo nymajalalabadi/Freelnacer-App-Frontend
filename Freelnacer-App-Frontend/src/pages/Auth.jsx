@@ -10,7 +10,6 @@ function Auth() {
       </div>
     </div>
   </div>
-
   )
 }
 
