@@ -3,7 +3,6 @@ import { getUser } from "../../services/authService";
 
 
 export default function useUser() {
-  
   const { data, isLoading } = useQuery({
     queryKey: ["user"],
     queryFn: getUser,
