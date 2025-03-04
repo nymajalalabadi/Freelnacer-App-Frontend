@@ -1,12 +1,11 @@
 import { useEffect, useState } from "react";
 import SendOPTFrom from "./SendOPTFrom";
 import CheckOPTFrom from "./CheckOPTFrom";
-import { useMutation } from "@tanstack/react-query";
 import toast from "react-hot-toast";
-import { getOPT } from "../../services/authService";
 import { useForm } from "react-hook-form";
 import useUser from "./useUser";
 import { useNavigate } from "react-router-dom";
+import useGetOTPUser from "./useGetOTPUser";
 
 
 function AuthContainer() {
@@ -16,9 +15,7 @@ function AuthContainer() {
 
   const {handleSubmit, register, formState:{ errors }, getValues } = useForm();
 
-  const { isPending, mutateAsync, data : otpResponse } = useMutation({
-    mutationFn: getOPT,
-  })
+  const {isPending, otpResponse } = useGetOTPUser();
 
   const { user } = useUser();
 
@@ -31,11 +28,13 @@ function AuthContainer() {
 
   const sendOtpHandler = async (data) => {
     try {
-      const { message } = await mutateAsync(data);
-
-      setStep(2);
-      
-      toast.success(message);
+      // Modified: Pass callbacks to handle response properly
+      otpResponse(data, {
+        onSuccess: () => {
+          setStep(2);
+          // Toast is already displayed in the hook's onSuccess callback
+        }
+      });
     } catch (error) {
       toast.error(error?.response?.data?.message);
     }
@@ -46,7 +45,7 @@ function AuthContainer() {
       case 1:
         return <SendOPTFrom register={register} onSubmit={handleSubmit(sendOtpHandler)}  isPending={isPending} errors={errors}/>;
       case 2:
-        return <CheckOPTFrom onBack={() => setStep((s) => s -1)} phoneNumber={getValues("phoneNumber")} onReSendOtp={sendOtpHandler} otpResponse={otpResponse}/>;
+        return <CheckOPTFrom onBack={() => setStep((s) => s -1)} phoneNumber={getValues("phoneNumber")} onReSendOtp={handleSubmit(sendOtpHandler)} otpResponse={otpResponse}/>;
       default:
         return null;
     }

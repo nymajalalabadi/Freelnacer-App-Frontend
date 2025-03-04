@@ -1,50 +1,44 @@
 import TextField from "../../ui/TextField";
-import { useMutation } from "@tanstack/react-query";
-import { completeProfile } from "../../services/authService";
 import toast from "react-hot-toast";
 import Loading from "../../ui/Loading";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import RadioInputGroup from "../../ui/RadioInputGroup";
+import useCompleteProfile from "./useCompleteProfile";
 
-function CompleteProfileFrom() {
+function CompleteProfileForm() {
   const { handleSubmit, register, watch, formState: { errors } } = useForm();
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
-  const { isPending, mutateAsync } = useMutation({
-    mutationFn : completeProfile
-  });
+  const { isUpdating, completeProfileUser } = useCompleteProfile();
 
+  const onSubmit = async(data) => {
+    try {
+      completeProfileUser(data, {
+        onSuccess: (response) => {
+          const { user } = response;
+          
+          if(user.status !== 2) {
+            navigate("/");
+            toast("please wait for admin approval", { icon: "🕒" });
+            return;
+          }
 
-  const onSubmit  = async(data) => {
-    try{
-      const {user, message} = await mutateAsync(data);
-      toast.success(message);
+          if(user.role === "OWNER") {
+            return navigate("/owner");
+          }
+          
+          if(user.role === "FREELANCER") {
+            return navigate("/freelnacer");
+          }
 
-      if(user.status !== 2) 
-      {
-          navigate("/");
-          toast("please wait for admin approval", { icon: "���" });
-          return;
-      }
-
-      if(user.role === "OWNER")
-      {
-        return navigate("/owner");
-      }
-      
-      if(user.role === "FREELNACER")
-      {
-        return navigate("/freelnacer");
-      }
-
-      if(user.role === "ADMIN")
-        {
-          return navigate("/admin");
+          if(user.role === "ADMIN") {
+            return navigate("/admin");
+          }
         }
-
-    }catch(error){
+      });
+    } catch(error) {
       toast.error(error?.response?.data?.message);
     }
   }
@@ -77,7 +71,7 @@ function CompleteProfileFrom() {
             />
 
               <div>
-                {isPending ? (
+                {isUpdating ? (
                 <Loading/>
                 ) : (
                 <button type="submit" className="btn btn--primary w-full">Submit</button>
@@ -89,4 +83,4 @@ function CompleteProfileFrom() {
   )
 }
 
-export default CompleteProfileFrom
+export default CompleteProfileForm
